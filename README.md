@@ -53,9 +53,8 @@ Proc. of the 14th Congress of the Italian Association for Artificial Intelligenc
 This resource, as well as the original Babelfied Wikipedia, is distributed under the CC-BY-NC licence: http://creativecommons.org/licenses/by-nc-sa/3.0/ The authors of the original Babelfied Wikipedia have no responsibility for the content of this resource.
 
 The pretrained Wikipedia embeddings (words and supersenses together) in W2V format can be downloaded here:
-https://public.ukp.informatik.tu-darmstadt.de/wikipedia/supersense-embeddings.bin
 https://public.ukp.informatik.tu-darmstadt.de/wikipedia/supersense-embeddings.txt
-(skip-gram, 300 dimensions, window size = 2, min. frequency = 200. Retrain on your own if you wish differently - parameter suitability varies, depending on your target task)
+(skip-gram, 300 dimensions, window size = 2, min. frequency = 200. Retrain on your own if you wish differently - parameter suitability varies, depending on your target task). Versions with only word_supersense and only supersense also available.
 
 ### Data formats
 
@@ -63,10 +62,15 @@ https://public.ukp.informatik.tu-darmstadt.de/wikipedia/supersense-embeddings.tx
 We used the BabelNet API to map the annotations to WordNet 3.0 synsets and from there to their supersenses where available. The resulting files are, despite their name, gzipped plain text files (to facilitate word2vec training) with some nouns and verbs having their supersenses appended. Example:
 
 Annotated file (in this resource):
-Journalist_noun.person reporting_verb.communication and evaluation_noun.act of video_noun.communication games_noun.act in periodicals_noun.communication began_verb.change from the late_adj.all 1970s to 1980 in general_adj.all coin-operated_adj.pert industry_noun.act magazines_noun.communication like Play_noun.communication Meter_noun.quantity and RePlay, home_noun.location entertainment_noun.act magazines_noun.communication like "Video", as well as magazines_noun.communication focused_verb.change on computing_verb.cognition and new_adj.all information_noun.cognition technologies_noun.cognition like InfoWorld or Popular Electronics.
 
+```
+Journalist_noun.person reporting_verb.communication and evaluation_noun.act of video_noun.communication games_noun.act in periodicals_noun.communication began_verb.change from the late_adj.all 1970s to 1980 in general_adj.all coin-operated_adj.pert industry_noun.act magazines_noun.communication like Play_noun.communication Meter_noun.quantity and RePlay, home_noun.location entertainment_noun.act magazines_noun.communication like "Video", as well as magazines_noun.communication focused_verb.change on computing_verb.cognition and new_adj.all information_noun.cognition technologies_noun.cognition like InfoWorld or Popular Electronics.
+```
 Original file (downloadable separately, article IDs match):
+
+```
 Journalist reporting and evaluation of video games in periodicals began from the late 1970s to 1980 in general coin-operated industry magazines like Play Meter and RePlay, home entertainment magazines like "Video", as well as magazines focused on computing and new information technologies like InfoWorld or Popular Electronics.
+```
 
 ## Experiments
 
@@ -123,3 +127,11 @@ units, epochs, batch:  300 70 100
 ### Text classification experiments
 
 * code to be found in the folder `classification`
+* run with:
+```bash
+$ THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python TextClassesKeras_CNN_sups.py 'path-to-train-file-pos' 'path-to-train-file-neg' 'path-to-dev-file-pos' 'path-to-dev-file-neg' 'path-to-test-file-pos' 'path-to-test-file-neg'
+```
+* the train/test files are expected in the two-column format (original text, supersense-replaced text) separated by tab:
+```
+i 'm sorry to say that this should seal the deal - arnold be not , nor will he be , back .	i verbstative sorry to verbcommunication that this should verbchange the nounpossession - nounperson verbstative not , nor will he verbstative , back .
+```
