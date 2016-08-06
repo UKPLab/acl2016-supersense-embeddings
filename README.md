@@ -53,7 +53,7 @@ Proc. of the 14th Congress of the Italian Association for Artificial Intelligenc
 This resource, as well as the original Babelfied Wikipedia, is distributed under the CC-BY-NC licence: http://creativecommons.org/licenses/by-nc-sa/3.0/ The authors of the original Babelfied Wikipedia have no responsibility for the content of this resource.
 
 The pretrained Wikipedia embeddings (words and supersenses together) in W2V format can be downloaded here:
-https://public.ukp.informatik.tu-darmstadt.de/wikipedia/supersense-embeddings.txt
+https://public.ukp.informatik.tu-darmstadt.de/wikipedia/supersense-embeddings.txt.zip
 (skip-gram, 300 dimensions, window size = 2, min. frequency = 200. Retrain on your own if you wish differently - parameter suitability varies, depending on your target task). Versions with only word_supersense and only supersense also available.
 
 ### Data formats
